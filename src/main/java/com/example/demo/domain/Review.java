@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.example.demo.dto.ReviewRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,10 +17,22 @@ public class Review {
     private Long id;
 
     private Long score;
-    private String Content;
+    private String content;
 
     @ManyToOne
     @JoinColumn(nullable=false)
     private Menu menu;
 
+    public static Review from(ReviewRequest reviewRequest, Menu menu){
+        return builder()
+                .score(reviewRequest.getScore())
+                .content(reviewRequest.getContent())
+                .menu(menu)
+                .build();
+    }
+
+    public void update(ReviewRequest reviewRequest) {
+        this.score = reviewRequest.getScore();
+        this.content = reviewRequest.getContent();
+    }
 }
