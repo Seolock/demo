@@ -12,12 +12,15 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Menu {
+public class Menu extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // @Column(nullable = false, length = 30)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String name;
+    @Column(nullable = false)
     private Long price;
 
     @OneToMany(mappedBy="menu",fetch=FetchType.LAZY,cascade=CascadeType.ALL)

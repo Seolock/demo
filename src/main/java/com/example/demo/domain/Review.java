@@ -10,13 +10,15 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Review {
+public class Review extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Long score;
+    @Column(nullable = false, length = 500)
     private String content;
 
     @ManyToOne
